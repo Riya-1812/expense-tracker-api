@@ -1,43 +1,121 @@
 # Expense Tracker REST API
 
-A small REST API for tracking personal expenses, built with Flask and SQLite.
-Demonstrates CRUD design, request validation, and a simple aggregation endpoint.
+A simple and practical REST API built with **Python, Flask, and SQLite** to manage personal expenses. This project demonstrates backend API development, CRUD operations, input validation, database handling, and building clean RESTful endpoints.
+
+I built this project to practice designing a backend service that can create, manage, and analyze expense data through well-structured APIs.
 
 ## Features
-- `POST /api/expenses` — create an expense
-- `GET /api/expenses` — list expenses (optional `?category=` filter)
-- `GET /api/expenses/<id>` — get one expense
-- `PUT /api/expenses/<id>` — update an expense
-- `DELETE /api/expenses/<id>` — delete an expense
-- `GET /api/summary` — total spend and count grouped by category
-- `GET /api/health` — health check
 
-## Run locally
+* Create, view, update, and delete expenses
+* Filter expenses by category
+* Generate spending summaries grouped by category
+* Health check endpoint for monitoring
+* Request validation for safer API usage
+* SQLite database integration
+
+### Available Endpoints
+
+| Method | Endpoint             | Description                                    |
+| ------ | -------------------- | ---------------------------------------------- |
+| POST   | `/api/expenses`      | Create a new expense                           |
+| GET    | `/api/expenses`      | Get all expenses (supports category filtering) |
+| GET    | `/api/expenses/<id>` | Get an expense by ID                           |
+| PUT    | `/api/expenses/<id>` | Update an existing expense                     |
+| DELETE | `/api/expenses/<id>` | Delete an expense                              |
+| GET    | `/api/summary`       | View total spending and category-wise summary  |
+| GET    | `/api/health`        | Check API health status                        |
+
+## Running Locally
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd expense-tracker-api
+```
+
+### 2. Create and activate a virtual environment
+
 ```bash
 python3 -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+source venv/bin/activate
+```
+
+For Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+### 4. Start the application
+
+```bash
 python run.py
 ```
-Server runs at `http://localhost:5000`.
 
-## Try it
+The API will be available at:
+
+```
+http://localhost:5001
+```
+
+## Example API Usage
+
+Create an expense:
+
 ```bash
 curl -X POST http://localhost:5000/api/expenses \
-  -H "Content-Type: application/json" \
-  -d '{"description": "Groceries", "amount": 42.50, "category": "food"}'
+-H "Content-Type: application/json" \
+-d '{"description":"Groceries","amount":42.50,"category":"food"}'
+```
 
-curl http://localhost:5000/api/expenses
+Get all expenses:
+
+```bash
+curl http://localhost:5001/api/expenses
+```
+
+Get expense summary:
+
+```bash
 curl http://localhost:5000/api/summary
 ```
 
-## Deploying
-This runs anywhere Python does:
-- **Render / Railway**: connect the repo, set start command to `gunicorn run:app`.
-- **Docker**: add a `Dockerfile` with `FROM python:3.12-slim`, copy the app, `pip install -r requirements.txt`, `CMD ["gunicorn", "-b", "0.0.0.0:5000", "run:app"]`.
+## Project Structure
 
-## Possible extensions (good talking points in interviews)
-- Swap SQLite for PostgreSQL using SQLAlchemy for a production-grade setup.
-- Add user accounts + auth (JWT) so expenses are per-user.
-- Add pagination to `GET /api/expenses`.
-- Add automated tests with `pytest` + Flask's test client.
+```
+expense-tracker-api/
+│
+├── app/              # Flask application code
+├── run.py            # Application entry point
+├── requirements.txt  # Python dependencies
+└── expenses.db       # SQLite database
+```
+
+
+## Deployment
+
+The application can be deployed on platforms that support Python applications, such as Render or Railway.
+
+For production deployment, it can be served using Gunicorn:
+
+```bash
+gunicorn run:app
+```
+
+## Tech Stack
+
+* **Backend:** Python, Flask
+* **Database:** SQLite
+* **API Style:** REST
+* **Tools:** Git, GitHub
+
+---
+
+Built as a backend engineering project to practice API design, database operations, and clean application structure.
