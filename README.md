@@ -64,7 +64,7 @@ http://localhost:5001
 Create an expense:
 
 ```bash
-curl -X POST http://localhost:5000/api/expenses \
+curl -X POST http://localhost:5001/api/expenses \
 -H "Content-Type: application/json" \
 -d '{"description":"Groceries","amount":42.50,"category":"food"}'
 ```
@@ -78,7 +78,7 @@ curl http://localhost:5001/api/expenses
 Get expense summary:
 
 ```bash
-curl http://localhost:5000/api/summary
+curl http://localhost:5001/api/summary
 ```
 
 ## Project Structure
